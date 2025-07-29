@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Pengaduan Masyarakat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D1FAE5',
+                        secondary: '#10B981',
+                        dark: '#047857'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans" x-data="adminApp()">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <div class="sidebar w-64 bg-white shadow-lg flex flex-col">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/40x40" alt="Logo Desa Modern" class="h-10 w-10 rounded-full">
+                        <span class="ml-3 text-lg font-semibold text-dark">Desa Dani</span>
+                    </div>
+                    <button @click="toggleSidebar" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto">
+                <div class="p-4 space-y-2">
+                    <div class="space-y-1 mt-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg bg-primary text-dark font-medium">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-primary hover:text-dark transition">
+                            <i class="fas fa-list-alt mr-3"></i>
+                            <span>Daftar Pengaduan</span>
+                        </a>
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-primary hover:text-dark transition">
+                            <i class="fas fa-users mr-3"></i>
+                            <span>Data Masyarakat</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="p-4 border-t border-gray-200">
+                <button class="w-full flex items-center justify-center py-2 px-4 rounded-lg bg-primary text-dark hover:bg-secondary hover:text-white transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Keluar</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm z-10">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button @click="toggleSidebar" class="mr-4 text-gray-500 hover:text-dark md:hidden">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-dark">Dashboard Admin</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="relative text-gray-500 hover:text-dark">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500"></span>
+                        </button>
+                        <div class="relative">
+                            <button @click="toggleProfileDropdown" class="flex items-center focus:outline-none">
+                                <img src="https://placehold.co/40x40" alt="Admin profile" class="h-8 w-8 rounded-full">
+                            </button>
+                            <div x-show="profileDropdown" @click.away="profileDropdown = false" 
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-20">
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary">Profil Saya</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary">Pengaturan</a>
+                                <div class="border-t border-gray-200"></div>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary">Keluar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-primary/10">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">Total Pengaduan</p>
+                                <h3 class="text-2xl font-bold text-dark mt-1">142</h3>
+                            </div>
+                            <div class="bg-primary/50 rounded-full p-3 text-secondary">
+                                <i class="fas fa-comment-alt text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center text-sm text-gray-500">
+                            <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                            <span>5.2% dari bulan lalu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">Dalam Proses</p>
+                                <h3 class="text-2xl font-bold text-dark mt-1">27</h3>
+                            </div>
+                            <div class="bg-primary/50 rounded-full p-3 text-secondary">
+                                <i class="fas fa-spinner text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center text-sm text-gray-500">
+                            <i class="fas fa-arrow-down text-red-500 mr-1"></i>
+                            <span>3.1% dari bulan lalu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">Selesai</p>
+                                <h3 class="text-2xl font-bold text-dark mt-1">89</h3>
+                            </div>
+                            <div class="bg-primary/50 rounded-full p-3 text-secondary">
+                                <i class="fas fa-check-circle text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center text-sm text-gray-500">
+                            <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                            <span>12.7% dari bulan lalu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">Pengguna Aktif</p>
+                                <h3 class="text-2xl font-bold text-dark mt-1">320</h3>
+                            </div>
+                            <div class="bg-primary/50 rounded-full p-3 text-secondary">
+                                <i class="fas fa-users text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center text-sm text-gray-500">
+                            <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                            <span>8.5% dari bulan lalu</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts and Recent Complaints -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Status Chart -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-lg font-semibold text-dark mb-4">Statistik Pengaduan</h2>
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Complaints -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-lg font-semibold text-dark mb-4">Pengaduan Terbaru</h2>
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-medium text-dark">Jalan Rusak</p>
+                                        <p class="text-sm text-gray-500">RT 05/RW 02</p>
+                                    </div>
+                                    <span class="bg-primary text-secondary text-xs px-2 py-1 rounded-full">Baru</span>
+                                </div>
+                                <p class="text-sm mt-1 text-gray-600 truncate">Jalan di depan SD rusak dan membahayakan anak-anak sekolah...</p>
+                            </div>
+                            
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-medium text-dark">Sampah Menumpuk</p>
+                                        <p class="text-sm text-gray-500">RT 03/RW 01</p>
+                                    </div>
+                                    <span class="bg-yellow-50 text-yellow-600 text-xs px-2 py-1 rounded-full">Proses</span>
+                                </div>
+                                <p class="text-sm mt-1 text-gray-600 truncate">Tempat pembuangan sampah sudah penuh dan tidak diangkut selama...</p>
+                            </div>
+                            
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-medium text-dark">Air Tidak Mengalir</p>
+                                        <p class="text-sm text-gray-500">RT 02/RW 04</p>
+                                    </div>
+                                    <span class="bg-red-50 text-red-600 text-xs px-2 py-1 rounded-full">Penting</span>
+                                </div>
+                                <p class="text-sm mt-1 text-gray-600 truncate">Air PAM tidak mengalir sejak 3 hari yang lalu...</p>
+                            </div>
+                            
+                            <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-medium text-dark">Lampu Jalan Mati</p>
+                                        <p class="text-sm text-gray-500">RT 07/RW 03</p>
+                                    </div>
+                                    <span class="bg-green-50 text-green-600 text-xs px-2 py-1 rounded-full">Selesai</span>
+                                </div>
+                                <p class="text-sm mt-1 text-gray-600 truncate">Lampu jalan di depan gang bina karya sudah diperbaiki...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-lg font-semibold text-dark mb-4">Aktivitas Terkini</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-primary/30">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pengaduan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#142</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-dark">Jalan Rusak</div>
+                                        <div class="text-sm text-gray-500">RT 05/RW 02</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary text-secondary">Baru</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-secondary hover:text-dark mr-3">Lihat</a>
+                                        <a href="#" class="text-gray-500 hover:text-dark">Proses</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#141</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-dark">Sampah Menumpuk</div>
+                                        <div class="text-sm text-gray-500">RT 03/RW 01</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-50 text-yellow-600">Proses</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">14 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-secondary hover:text-dark mr-3">Lihat</a>
+                                        <a href="#" class="text-gray-500 hover:text-dark">Proses</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#140</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-dark">Air Tidak Mengalir</div>
+                                        <div class="text-sm text-gray-500">RT 02/RW 04</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-50 text-red-600">Penting</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">13 Jun 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-secondary hover:text-dark mr-3">Lihat</a>
+                                        <a href="#" class="text-gray-500 hover:text-dark">Proses</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        function adminApp() {
+            return {
+                sidebarOpen: true,
+                profileDropdown: false,
+                
+                toggleSidebar() {
+                    this.sidebarOpen = !this.sidebarOpen;
+                    document.querySelector('.sidebar').classList.toggle('-translate-x-full');
+                },
+                
+                toggleProfileDropdown() {
+                    this.profileDropdown = !this.profileDropdown;
+                }
+            }
+        }
+
+        // Initialize charts after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Status Chart
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            const statusChart = new Chart(statusCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Pengaduan Baru',
+                            data: [12, 19, 15, 22, 18, 24],
+                            backgroundColor: '#D1FAE5',
+                            borderColor: '#10B981',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Selesai',
+                            data: [8, 14, 12, 16, 14, 13],
+                            backgroundColor: '#ECFDF5',
+                            borderColor: '#059669',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

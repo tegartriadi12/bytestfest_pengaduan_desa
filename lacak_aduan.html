@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengaduan Warga - Desa Dani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A7F3D0', // hijau muda
+                        secondary: '#BFDBFE', // biru muda
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800">Pengaduan Desa Dani</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="text-gray-600 hover:text-primary font-medium">Beranda</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Tracking Section -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Lacak Status Pengaduan</h2>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="mb-6">
+                            <label for="trackingNumber" class="block text-sm font-medium text-gray-700 mb-2">Nomor Tiket Pengaduan</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="trackingNumber" placeholder="Masukkan nomor tiket..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+                                <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-green-300 transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50">
+                                    Lacak
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Status Display -->
+                <section class="mb-12">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <!-- Status Card Header -->
+                        <div class="bg-secondary px-6 py-4">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-medium text-gray-800">Status Pengaduan</h3>
+                                <span class="px-3 py-1 bg-white rounded-full text-sm font-medium">ID: PGU-2023-0125</span>
+                            </div>
+                        </div>
+
+                        <!-- Status Info -->
+                        <div class="p-6">
+                            <div class="mb-6">
+                                <h4 class="text-md font-semibold text-gray-700 mb-2">Detail Masalah</h4>
+                                <p class="text-gray-600">Jalan Desa RT 03 mengalami kerusakan parah setelah hujan deras, menyebabkan akses terganggu.</p>
+                            </div>
+
+                            <div class="mb-8">
+                                <h4 class="text-md font-semibold text-gray-700 mb-4">Proses Status</h4>
+                                
+                                <!-- Status Timeline -->
+                                <div class="relative">
+                                    <!-- Timeline line -->
+                                    <div class="absolute left-4 h-full w-0.5 bg-gray-200"></div>
+                                    
+                                    <!-- Timeline steps -->
+                                    <div class="space-y-8">
+                                        <!-- Step 1 -->
+                                        <div class="flex items-start space-x-4 relative">
+                                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-800" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-800">Pengaduan Diterima</p>
+                                                <p class="text-xs text-gray-500">25 Januari 2023, 09:15 WIB</p>
+                                                <p class="text-sm text-gray-600 mt-1">Pengaduan Anda telah kami terima dan sedang dalam proses verifikasi.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 2 -->
+                                        <div class="flex items-start space-x-4 relative">
+                                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-800" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-800">Dalam Proses</p>
+                                                <p class="text-xs text-gray-500">26 Januari 2023, 14:30 WIB</p>
+                                                <p class="text-sm text-gray-600 mt-1">Pengaduan sedang ditindaklanjuti oleh tim teknis desa.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 3 -->
+                                        <div class="flex items-start space-x-4 relative">
+                                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center z-10">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Selesai (Estimasi)</p>
+                                                <p class="text-xs text-gray-500">30 Januari 2023</p>
+                                                <p class="text-sm text-gray-500 mt-1">Proses perbaikan diperkirakan akan selesai pada tanggal ini.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-secondary rounded-lg">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-700 mb-1">Petugas Penanggung Jawab</h4>
+                                    <p class="text-gray-600">Bapak Surya (Tim Infrastruktur Desa)</p>
+                                </div>
+                                <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-300 transition duration-200 text-sm">
+                                    Hubungi Petugas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History Section -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Riwayat Pengaduan Anda</h2>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <!-- History List -->
+                        <ul>
+                            <!-- History Item 1 -->
+                            <li class="border-b border-gray-100 last:border-b-0">
+                                <div class="p-6 hover:bg-gray-50 transition duration-150">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h3 class="font-medium text-gray-800">Pengaduan Jalan Rusak RT 03</h3>
+                                        <span class="px-2 py-1 bg-primary text-xs text-white rounded-full">ID: PGU-2023-0125</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">Jalan Desa RT 03 rusak parah setelah hujan deras.</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">Dibuat: 25 Jan 2023</span>
+                                        <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Dalam Proses</span>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- History Item 2 -->
+                            <li class="border-b border-gray-100 last:border-b-0">
+                                <div class="p-6 hover:bg-gray-50 transition duration-150">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h3 class="font-medium text-gray-800">Permasalahan Drainase</h3>
+                                        <span class="px-2 py-1 bg-secondary text-xs text-gray-800 rounded-full">ID: PGU-2023-0108</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">Drainase di depan rumah warga tersumbat dan menyebabkan genangan air.</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">Dibuat: 8 Jan 2023</span>
+                                        <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Selesai</span>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- History Item 3 -->
+                            <li class="border-b border-gray-100 last:border-b-0">
+                                <div class="p-6 hover:bg-gray-50 transition duration-150">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <h3 class="font-medium text-gray-800">Penerangan Jalan</h3>
+                                        <span class="px-2 py-1 bg-secondary text-xs text-gray-800 rounded-full">ID: PGU-2022-1203</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">Lampu jalan di RT 05 tidak menyala selama 3 hari.</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">Dibuat: 3 Des 2022</span>
+                                        <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Selesai</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <!-- View More Button -->
+                        <div class="p-4 bg-gray-50 text-center">
+                            <button class="text-sm text-primary font-medium hover:text-green-600 transition duration-150">
+                                Lihat Selengkapnya →
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+       <footer class="bg-green-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- LaporDesa Info Section -->
+            <div class="col-span-1">
+                <h3 class="text-lg font-semibold text-white">LaporDesa</h3>
+                <p class="mt-4 text-white">
+                    Sistem pengaduan masyarakat digital untuk kemajuan Desa.
+                </p>
+                <div class="mt-6 flex space-x-4">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="text-white hover:text-white">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-white">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0=" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="col-span-1">
+                <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Tautan Cepat</h3>
+                <ul class="mt-4 space-y-2">
+                    <li><a href="index.html" class="text-base text-white hover:text-white">Beranda</a></li>
+                    <li><a href="#" class="text-base text-white hover:text-white">Buat Pengaduan</a></li>
+                    <li><a href="#" class="text-base text-white hover:text-white">Lacak Pengaduan</a></li>
+                    <li><a href="#" class="text-base text-white hover:text-white">Daftar Pengaduan</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information Section -->
+            <div class="col-span-1">
+                <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Kontak</h3>
+                <ul class="mt-4 space-y-2">
+                    <li class="text-base text-white">Desa Dani</li>
+                    <li class="text-base text-white">Kecamatan Karanganyar</li>
+                    <li class="text-base text-white">Kabupaten Karanganyar</li>
+                    <li class="text-base text-white">Jawa Tengah, Indonesia</li>
+                    <li class="text-base text-white">Email: lapor@desamakmur.id</li>
+                    <li class="text-base text-white">Telp: +62 123 4567 8901</li>
+                </ul>
+            </div>
+
+            <!-- Service Hours Section -->
+            <div class="col-span-1">
+                <h3 class="text-sm font-semibold text-white tracking-wider uppercase">Jam Pelayanan</h3>
+                <ul class="mt-4 space-y-2">
+                    <li class="text-base text-white">Senin-Jumat: 08.00-16.00 WIB</li>
+                    <li class="text-base text-white">Sabtu: 08.00-14.00 WIB</li>
+                    <li class="text-base text-white">Minggu: Libur</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div class="mt-12 border-t border-black-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-base text-white">
+                © 2023 Sistem Pengaduan Masyarakat Desa Dani. All rights reserved.
+            </p>
+            <div class="mt-4 md:mt-0">
+                <a href="#" class="text-sm text-white hover:text-white ml-6">Kebijakan Privasi</a>
+                <a href="#" class="text-sm text-white hover:text-white ml-6">Syarat & Ketentuan</a>
+                <a href="#" class="text-sm text-white hover:text-white ml-6">FAQ</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    <script>
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate tracking functionality
+            const trackButton = document.querySelector('button[onclick="trackComplaint()"]');
+            
+            document.querySelector('button[type="button"]').addEventListener('click', function() {
+                const trackingNumber = document.getElementById('trackingNumber').value;
+                
+                if (trackingNumber) {
+                    alert(`Mencari pengaduan dengan nomor: ${trackingNumber}\n\n(Fitur ini akan menampilkan data pengaduan jika implementasi backend tersedia)`);
+                } else {
+                    alert('Silakan masukkan nomor tiket pengaduan terlebih dahulu');
+                }
+            });
+            
+            // Add hover effects to history items
+            const historyItems = document.querySelectorAll('li.hover\\:bg-gray-50');
+            historyItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    alert('Anda akan melihat detail pengaduan ini.\n\n(Untuk implementasi lengkap, hubungkan dengan data dari database)');
+                });
+            });
+            
+            // Contact button functionality
+            document.querySelector('button.bg-primary.text-white').addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Anda dapat menghubungi petugas melalui:\n\nWhatsApp: 0812-3456-7890\nTelepon: (021) 123-456\nEmail: surya@desaenggunakan.id');
+            });
+        });
+    </script>
+</body>
+</html>
